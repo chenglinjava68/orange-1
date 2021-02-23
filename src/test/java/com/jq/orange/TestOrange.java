@@ -26,16 +26,58 @@ public class TestOrange {
     @Test
     public void testForeach() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
-        String sql = ("<foreach collection='list' open='(' separator=',' close=')'>#{item.name}</foreach><if test='item != null'>#{item.id}</if>");
+        String sql = ("select * from user where name in <foreach collection='list' open='(' separator=',' close=')'>#{item.name}</foreach>");
         Map<String, Object> map = new HashMap<>();
-        map.put("minId", 100);
-        map.put("maxId", 500);
 
         ArrayList<User> arrayList = new ArrayList<>();
         arrayList.add(new User(10, "tom"));
         arrayList.add(new User(11, "jerry"));
-        map.put("list", arrayList);
-        map.put("item", new User(19, "it"));
+        map.put("list", arrayList.toArray());
+
+        SqlMeta sqlMeta = engine.parse(sql, map);
+        System.out.println(sqlMeta.getSql());
+        sqlMeta.getJdbcParamValues().forEach(System.out::println);
+    }
+
+    @Test
+    public void testForeachMap() {
+        DynamicSqlEngine engine = new DynamicSqlEngine();
+        String sql = ("<foreach collection='users' open='(' separator=',' close=')'>#{item}</foreach>");
+        Map<String, Object> map = new HashMap<>();
+
+        Map<String, Object> users = new HashMap<String, Object>(){
+            {
+                put("aaa","a1");
+                put("bbb","b1");
+            }
+        };
+
+        map.put("users", users);
+
+        SqlMeta sqlMeta = engine.parse(sql, map);
+        System.out.println(sqlMeta.getSql());
+        sqlMeta.getJdbcParamValues().forEach(System.out::println);
+    }
+
+    @Test
+    public void testMultiForeach() {
+        DynamicSqlEngine engine = new DynamicSqlEngine();
+        String sql = ("<foreach collection='list' open='(' separator=',' close=')'>#{item}</foreach><foreach collection='list2' open='{' separator=',' close='}'>#{item}</foreach>");
+        Map<String, Object> map = new HashMap<>();
+
+        ArrayList<String> list = new ArrayList<String>() {{
+            add("a");
+            add("b");
+        }};
+
+        map.put("list", list);
+
+        ArrayList<String> list2 = new ArrayList<String>() {{
+            add("c");
+            add("d");
+        }};
+
+        map.put("list2", list2);
 
         SqlMeta sqlMeta = engine.parse(sql, map);
         System.out.println(sqlMeta.getSql());
