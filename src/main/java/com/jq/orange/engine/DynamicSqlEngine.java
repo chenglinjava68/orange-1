@@ -1,6 +1,7 @@
 package com.jq.orange.engine;
 
-import com.jq.orange.Context;
+import com.jq.orange.context.Context;
+import com.jq.orange.SqlMeta;
 import com.jq.orange.node.SqlNode;
 import com.jq.orange.tag.XmlParser;
 import com.jq.orange.token.TokenHandler;
@@ -10,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 动态sql引擎
+ *
  * @program: orange
  * @description:
  * @author: jiangqiang
@@ -17,19 +20,30 @@ import java.util.Map;
  **/
 public class DynamicSqlEngine {
 
-    public void parse(String text, Map<String, Object> params) {
+    public SqlMeta parse(String text, Map<String, Object> params) {
         SqlNode sqlNode = XmlParser.parseXml2SqlNode(text);
         Context context = new Context(params);
         parseSqlText(sqlNode, context);
         parseParameter(context);
-        String sql = context.getSql();
-        System.out.println(sql);
+        SqlMeta sqlMeta = new SqlMeta(context.getSql(), context.getJdbcParameters());
+        return sqlMeta;
     }
 
+    /**
+     * 解析标签，去除标签，替换 ${}为常量值, #{}保留不变
+     *
+     * @param sqlNode
+     * @param context
+     */
     public void parseSqlText(SqlNode sqlNode, Context context) {
         sqlNode.apply(context);
     }
 
+    /**
+     * #{}替换成?，并且将?对应的参数值按顺序保存起来
+     *
+     * @param context
+     */
     public void parseParameter(Context context) {
         TokenParser tokenParser = new TokenParser("#{", "}", new TokenHandler() {
             @Override

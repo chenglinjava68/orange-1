@@ -25,6 +25,8 @@ public class ForeachHandler implements TagHandler {
         String item = element.attributeValue("item");
         String index = element.attributeValue("index");
 
+
+
         ForeachSqlNode foreachSqlNode = new ForeachSqlNode(collection, open, close, separator, item, index, new MixedSqlNode(contents));
         targetContents.add(foreachSqlNode);
 

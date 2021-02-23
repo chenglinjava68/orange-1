@@ -1,6 +1,9 @@
 package com.jq.orange.node;
 
-import com.jq.orange.Context;
+import com.jq.orange.context.Context;
+import com.jq.orange.context.ForeachContextProxy;
+import com.jq.orange.util.Constans;
+import com.jq.orange.util.OgnlUtil;
 
 /**
  * @program: orange
@@ -31,6 +34,25 @@ public class ForeachSqlNode implements SqlNode {
 
     @Override
     public void apply(Context context) {
+        Iterable<?> iterable = OgnlUtil.getIterable(collection, context.getData());
+        int currentIndex = 0;
+
+        context.appendSql(open);
+
+        for (Object o : iterable) {
+            //不是第一次，需要拼接分隔符
+            if (currentIndex != 0) {
+                context.appendSql(separator);
+            }
+            currentIndex++;
+            String newItem = Constans.prefix + currentIndex;
+            context.getData().put(newItem, o);
+            ForeachContextProxy contextProxy = new ForeachContextProxy(context, item, newItem);
+            contents.apply(contextProxy);
+        }
+
+        context.appendSql(close);
 
     }
+
 }

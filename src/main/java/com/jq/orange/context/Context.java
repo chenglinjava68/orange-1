@@ -1,4 +1,4 @@
-package com.jq.orange;
+package com.jq.orange.context;
 
 import com.jq.orange.util.OgnlUtil;
 
@@ -17,7 +17,7 @@ public class Context {
 
     StringBuilder sqlBuilder = new StringBuilder();
     List<Object> jdbcParameters = new ArrayList<>();
-    List<Object> jdbcParameterNames = new ArrayList<>();
+    //    List<Object> jdbcParameterNames = new ArrayList<>();
     Map<String, Object> data;
 
     public Context(Map<String, Object> data) {
@@ -53,4 +53,13 @@ public class Context {
     public void setSql(String text) {
         sqlBuilder = new StringBuilder(text);
     }
+
+    public List<Object> getJdbcParameters() {
+        return jdbcParameters;
+    }
+
+    public Map<String, Object> getData() {
+        return data;
+    }
+
 }
