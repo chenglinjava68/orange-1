@@ -25,7 +25,8 @@ public class Context {
     }
 
     public void appendSql(String text) {
-        sqlBuilder.append(text).append(" ");
+        if (text != null)
+            sqlBuilder.append(text).append(" ");
     }
 
     public void addParameter(Object o) {

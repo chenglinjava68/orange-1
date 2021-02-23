@@ -16,6 +16,14 @@ import java.util.Map;
 public class TestOrange {
 
     @Test
+    public void test() {
+        StringBuilder builder = new StringBuilder();
+        String a = null;
+        builder.append("abc").append(a).append("333");
+        System.out.println(builder.toString());
+    }
+
+    @Test
     public void testForeach() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
         String sql = ("<root><foreach item='its' index='index' collection='list' open='(' separator=',' close=')'> #{its.id }; #{ its . name}</foreach></root>");
@@ -32,4 +40,5 @@ public class TestOrange {
         System.out.println(sqlMeta.getSql());
         sqlMeta.getJdbcParamValues().forEach(System.out::println);
     }
+
 }

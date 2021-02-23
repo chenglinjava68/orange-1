@@ -3,6 +3,7 @@ package com.jq.orange.tag;
 import com.jq.orange.node.ForeachSqlNode;
 import com.jq.orange.node.MixedSqlNode;
 import com.jq.orange.node.SqlNode;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Element;
 
 import java.util.List;
@@ -25,7 +26,15 @@ public class ForeachHandler implements TagHandler {
         String item = element.attributeValue("item");
         String index = element.attributeValue("index");
 
-
+        if (StringUtils.isBlank(collection)) {
+            throw new RuntimeException("<foreach> attribute missing : collection");
+        }
+        if (StringUtils.isBlank(item)) {
+            item = "item";
+        }
+        if (StringUtils.isBlank(index)) {
+            index = "index";
+        }
 
         ForeachSqlNode foreachSqlNode = new ForeachSqlNode(collection, open, close, separator, item, index, new MixedSqlNode(contents));
         targetContents.add(foreachSqlNode);
