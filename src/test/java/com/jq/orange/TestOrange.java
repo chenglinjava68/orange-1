@@ -26,7 +26,7 @@ public class TestOrange {
     @Test
     public void testForeach() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
-        String sql = ("<root><foreach item='its' index='index' collection='list' open='(' separator=',' close=')'> #{its.id }; #{ its . name}</foreach></root>");
+        String sql = ("<foreach collection='list' open='(' separator=',' close=')'>#{item.name}</foreach><if test='item != null'>#{item.id}</if>");
         Map<String, Object> map = new HashMap<>();
         map.put("minId", 100);
         map.put("maxId", 500);
@@ -34,7 +34,8 @@ public class TestOrange {
         ArrayList<User> arrayList = new ArrayList<>();
         arrayList.add(new User(10, "tom"));
         arrayList.add(new User(11, "jerry"));
-        map.put("list", arrayList.toArray());
+        map.put("list", arrayList);
+        map.put("item", new User(19, "it"));
 
         SqlMeta sqlMeta = engine.parse(sql, map);
         System.out.println(sqlMeta.getSql());

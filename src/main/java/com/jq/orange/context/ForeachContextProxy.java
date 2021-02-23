@@ -19,7 +19,7 @@ public class ForeachContextProxy extends Context {
     String newItem;
 
     public ForeachContextProxy(Context context, String item, String newItem) {
-        super(null);
+        super(context.getData());
         this.sourceContext = context;
         this.item = item;
         this.newItem = newItem;
@@ -27,10 +27,11 @@ public class ForeachContextProxy extends Context {
 
     @Override
     public void appendSql(String text) {
+        //foreach标签中的文本节点解析 #{item}
         TokenParser tokenParser = new TokenParser("#{", "}", new TokenHandler() {
             @Override
             public String handleToken(String content) {
-                //item替换成自己的变量名 __foreach_item_1   __foreach_item_2   __foreach_item_3
+                //item替换成自己的变量名: __foreach_变量名_1   __foreach_变量名_2   __foreach_变量名_3 ......
                 String replace = RegexUtil.replace(content, item, newItem);
                 StringBuilder builder = new StringBuilder();
                 return builder.append("#{").append(replace).append("}").toString();

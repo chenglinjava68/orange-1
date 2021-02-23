@@ -44,11 +44,13 @@ public class ForeachSqlNode implements SqlNode {
             if (currentIndex != 0) {
                 context.appendSql(separator);
             }
-            currentIndex++;
-            String newItem = Constans.prefix + currentIndex;
-            context.getData().put(newItem, o);
+
+            String newItem = String.format("%s[%d]", collection, currentIndex);  //ongl可以直接获取  aaa[0]  形式的值
+//            String newItem = Constans.prefix + collection + "_" + currentIndex;
+//            context.getData().put(newItem, o);
             ForeachContextProxy contextProxy = new ForeachContextProxy(context, item, newItem);
             contents.apply(contextProxy);
+            currentIndex++;
         }
 
         context.appendSql(close);

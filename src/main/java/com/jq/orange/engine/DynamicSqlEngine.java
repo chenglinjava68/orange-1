@@ -1,7 +1,7 @@
 package com.jq.orange.engine;
 
-import com.jq.orange.context.Context;
 import com.jq.orange.SqlMeta;
+import com.jq.orange.context.Context;
 import com.jq.orange.node.SqlNode;
 import com.jq.orange.tag.XmlParser;
 import com.jq.orange.token.TokenHandler;
@@ -21,6 +21,7 @@ import java.util.Map;
 public class DynamicSqlEngine {
 
     public SqlMeta parse(String text, Map<String, Object> params) {
+        text = String.format("<root>%s</root>", text);
         SqlNode sqlNode = XmlParser.parseXml2SqlNode(text);
         Context context = new Context(params);
         parseSqlText(sqlNode, context);
