@@ -31,7 +31,7 @@ public class ForeachContextProxy extends Context {
 
     @Override
     public void appendSql(String text) {
-        //foreach标签中的文本节点解析 #{item.xxx} #{index}
+        //foreach标签中的文本节点解析 #{item.xxx}或者 #{index}
         TokenParser tokenParser = new TokenParser("#{", "}", new TokenHandler() {
             @Override
             public String handleToken(String content) {
