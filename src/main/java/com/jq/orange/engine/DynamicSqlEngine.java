@@ -20,14 +20,25 @@ import java.util.Map;
  **/
 public class DynamicSqlEngine {
 
+    Cache cache = new Cache();
+
     public SqlMeta parse(String text, Map<String, Object> params) {
         text = String.format("<root>%s</root>", text);
-        SqlNode sqlNode = XmlParser.parseXml2SqlNode(text);
+        SqlNode sqlNode = parseXml2SqlNode(text);
         Context context = new Context(params);
         parseSqlText(sqlNode, context);
         parseParameter(context);
         SqlMeta sqlMeta = new SqlMeta(context.getSql(), context.getJdbcParameters());
         return sqlMeta;
+    }
+
+    public SqlNode parseXml2SqlNode(String text) {
+        SqlNode node = cache.getNodeCache().get(text);
+        if (node == null) {
+            node = XmlParser.parseXml2SqlNode(text);
+            cache.getNodeCache().put(text, node);
+        }
+        return node;
     }
 
     /**

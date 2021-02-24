@@ -1,5 +1,6 @@
 package com.jq.orange;
 
+import com.jq.orange.engine.Cache;
 import com.jq.orange.engine.DynamicSqlEngine;
 import org.junit.Test;
 
@@ -77,7 +78,7 @@ public class TestOrange {
             add("d");
         }};
 
-        map.put("list2", list2);
+        map.put("list2", list2.toArray());
 
         SqlMeta sqlMeta = engine.parse(sql, map);
         System.out.println(sqlMeta.getSql());

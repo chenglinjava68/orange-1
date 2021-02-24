@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @program: orange
@@ -18,8 +17,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @create: 2021-02-22 16:25
  **/
 public class XmlParser {
-
-    static ConcurrentHashMap<String, SqlNode> cache = new ConcurrentHashMap<String, SqlNode>();
 
     static Map<String, TagHandler> nodeHandlers = new HashMap<String, TagHandler>() {
         {
@@ -36,24 +33,15 @@ public class XmlParser {
      */
     public static SqlNode parseXml2SqlNode(String text) {
 
-        return getFromCache(text);
-    }
-
-    public static SqlNode getFromCache(String text) {
-        SqlNode sqlNode = cache.get(text);
-        if (sqlNode == null) {
-
-            Document document = null;
-            try {
-                document = DocumentHelper.parseText(text);
-            } catch (DocumentException e) {
-                throw new RuntimeException(e.getMessage());
-            }
-            Element rootElement = document.getRootElement();
-            List<SqlNode> contents = parseElement(rootElement);
-            sqlNode = new MixedSqlNode(contents);
-            cache.put(text, sqlNode);
+        Document document = null;
+        try {
+            document = DocumentHelper.parseText(text);
+        } catch (DocumentException e) {
+            throw new RuntimeException(e.getMessage());
         }
+        Element rootElement = document.getRootElement();
+        List<SqlNode> contents = parseElement(rootElement);
+        SqlNode sqlNode = new MixedSqlNode(contents);
         return sqlNode;
     }
 

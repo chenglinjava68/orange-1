@@ -45,9 +45,12 @@ public class ForeachSqlNode implements SqlNode {
                 context.appendSql(separator);
             }
 
-            String newItem = String.format("%s[%d]", collection, currentIndex);  //ongl可以直接获取  aaa[0]  形式的值
+            String newItem = String.format("%s[%d]", collection, currentIndex);  //ognl可以直接获取  aaa[0]  形式的值
 //            String newItem = Constans.prefix + collection + "_" + currentIndex;
 //            context.getData().put(newItem, o);
+
+            // 创建代理context对象，主要是为了TextSqlNode解析调用appendSql方法的时候，可以使用代理对象复写的appendSql方法，
+            // 也就是append之前解析 #{item.xxx} 转化成 #{item[index].xxx}
             ForeachContextProxy contextProxy = new ForeachContextProxy(context, item, newItem);
             contents.apply(contextProxy);
             currentIndex++;
