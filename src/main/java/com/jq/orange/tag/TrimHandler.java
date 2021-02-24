@@ -21,9 +21,9 @@ public class TrimHandler implements TagHandler {
         String prefix = element.attributeValue("prefix");
         String suffix = element.attributeValue("suffix");
         String prefixesToOverride = element.attributeValue("prefixesToOverride");
-        List<String> prefixesOverride = Arrays.asList(prefixesToOverride.split("\\|"));
+        List<String> prefixesOverride = prefixesToOverride == null ? null : Arrays.asList(prefixesToOverride.split("\\|"));
         String suffixesToOverride = element.attributeValue("suffixesToOverride");
-        List<String> suffixesOverride = Arrays.asList(suffixesToOverride.split("\\|"));
+        List<String> suffixesOverride = suffixesToOverride == null ? null : Arrays.asList(suffixesToOverride.split("\\|"));
 
         List<SqlNode> contents = XmlParser.parseElement(element);
         TrimSqlNode trimSqlNode = new TrimSqlNode(new MixedSqlNode(contents), prefix, suffix, prefixesOverride, suffixesOverride);

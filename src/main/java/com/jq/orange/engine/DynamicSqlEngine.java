@@ -32,7 +32,7 @@ public class DynamicSqlEngine {
         return sqlMeta;
     }
 
-    public SqlNode parseXml2SqlNode(String text) {
+    private SqlNode parseXml2SqlNode(String text) {
         SqlNode node = cache.getNodeCache().get(text);
         if (node == null) {
             node = XmlParser.parseXml2SqlNode(text);
@@ -47,7 +47,7 @@ public class DynamicSqlEngine {
      * @param sqlNode
      * @param context
      */
-    public void parseSqlText(SqlNode sqlNode, Context context) {
+    private void parseSqlText(SqlNode sqlNode, Context context) {
         sqlNode.apply(context);
     }
 
@@ -56,7 +56,7 @@ public class DynamicSqlEngine {
      *
      * @param context
      */
-    public void parseParameter(Context context) {
+    private void parseParameter(Context context) {
         TokenParser tokenParser = new TokenParser("#{", "}", new TokenHandler() {
             @Override
             public String handleToken(String content) {
