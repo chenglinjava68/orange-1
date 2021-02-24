@@ -22,6 +22,7 @@ public class XmlParser {
         {
             put("foreach", new ForeachHandler());
             put("if", new IfHandler());
+            put("trim", new TrimHandler());
         }
     };
 
@@ -77,7 +78,7 @@ public class XmlParser {
 
     }
 
-    public static void main(String[] args) throws DocumentException {
+    public static void main(String[] args) {
         parseXml2SqlNode("<a>111<if test='true'>222<if test='true'>333</if>444<foreach collection='list' open='(' close=')' separator=',' item='item'>fff</foreach></if>555</a>");
     }
 }

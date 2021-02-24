@@ -17,22 +17,29 @@ public class ForeachContextProxy extends Context {
     Context sourceContext;
     String item;
     String newItem;
+    String index;
+    String newIndex;
 
-    public ForeachContextProxy(Context context, String item, String newItem) {
+    public ForeachContextProxy(Context context, String item, String newItem, String index, String newIndex) {
         super(context.getData());
         this.sourceContext = context;
         this.item = item;
         this.newItem = newItem;
+        this.index = index;
+        this.newIndex = newIndex;
     }
 
     @Override
     public void appendSql(String text) {
-        //foreach标签中的文本节点解析 #{item}
+        //foreach标签中的文本节点解析 #{item.xxx} #{index}
         TokenParser tokenParser = new TokenParser("#{", "}", new TokenHandler() {
             @Override
             public String handleToken(String content) {
-                //item替换成自己的变量名: __foreach_变量名_1   __foreach_变量名_2   __foreach_变量名_3 ......
+                //item替换成自己的变量名: item[0]  item[1] item[2] ......
                 String replace = RegexUtil.replace(content, item, newItem);
+                if (replace.equals(content))
+                    //index替换成自己的变量名: __index_xxx[0]  __index_xxx[1] __index_xxx[2] ......
+                    replace = RegexUtil.replace(content, index, newIndex);
                 StringBuilder builder = new StringBuilder();
                 return builder.append("#{").append(replace).append("}").toString();
             }

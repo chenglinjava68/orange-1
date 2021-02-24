@@ -27,7 +27,7 @@ public class TestOrange {
     @Test
     public void testForeach() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
-        String sql = ("select * from user where name in <foreach collection='list' open='(' separator=',' close=')'>#{item.name}</foreach>");
+        String sql = ("select * from user where name in <foreach collection='list' index='idx' open='(' separator=',' close=')'>#{item.name}== #{idx}</foreach>");
         Map<String, Object> map = new HashMap<>();
 
         ArrayList<User> arrayList = new ArrayList<>();

@@ -33,5 +33,5 @@ jerry
 ```
 
 # 注意
-目前仅支持 foreach if
-foreach 不支持map类型参数
+- 目前仅支持 foreach if
+- foreach 不支持map类型参数
