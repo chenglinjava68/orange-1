@@ -25,6 +25,22 @@ public class TestOrange {
     }
 
     @Test
+    public void testTrim() {
+        DynamicSqlEngine engine = new DynamicSqlEngine();
+        String sql = "<trim prefix='(' suffix=')' suffixesToOverride=',' prefixesToOverride='and' ><foreach collection='list' index='idx' open='(' separator=',' close=')'>#{item.name}== #{idx}</foreach><if test='id!=null'>  and xyz.,</if></trim>";
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", 2);
+        ArrayList<User> arrayList = new ArrayList<>();
+        arrayList.add(new User(10, "tom"));
+        arrayList.add(new User(11, "jerry"));
+        map.put("list", arrayList);
+
+        SqlMeta sqlMeta = engine.parse(sql, map);
+        System.out.println(sqlMeta.getSql());
+        sqlMeta.getJdbcParamValues().forEach(System.out::println);
+    }
+
+    @Test
     public void testForeach() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
         String sql = ("select * from user where name in <foreach collection='list' index='idx' open='(' separator=',' close=')'>#{item.name}== #{idx}</foreach>");
@@ -46,10 +62,10 @@ public class TestOrange {
         String sql = ("<foreach collection='users' open='(' separator=',' close=')'>#{item}</foreach>");
         Map<String, Object> map = new HashMap<>();
 
-        Map<String, Object> users = new HashMap<String, Object>(){
+        Map<String, Object> users = new HashMap<String, Object>() {
             {
-                put("aaa","a1");
-                put("bbb","b1");
+                put("aaa", "a1");
+                put("bbb", "b1");
             }
         };
 
