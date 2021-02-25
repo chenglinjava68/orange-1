@@ -34,10 +34,9 @@ public class DynamicSqlEngine {
         return sqlMeta;
     }
 
-    public Set<String> parseParameter(String text, Map<String, Object> params) {
+    public Set<String> parseParameter(String text) {
         text = String.format("<root>%s</root>", text);
         SqlNode sqlNode = parseXml2SqlNode(text);
-
         HashSet<String> set = new HashSet<>();
         sqlNode.applyParameter(set);
         return set;

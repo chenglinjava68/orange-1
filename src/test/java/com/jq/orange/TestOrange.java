@@ -1,12 +1,12 @@
 package com.jq.orange;
 
-import com.jq.orange.engine.Cache;
 import com.jq.orange.engine.DynamicSqlEngine;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @program: orange
@@ -132,6 +132,14 @@ public class TestOrange {
         SqlMeta sqlMeta = engine.parse(sql, map);
         System.out.println(sqlMeta.getSql());
         sqlMeta.getJdbcParamValues().forEach(System.out::println);
+    }
+
+    @Test
+    public void testParseParam() {
+        DynamicSqlEngine engine = new DynamicSqlEngine();
+        String sql = ("<foreach collection='list' open='(' separator=',' close=')'>#{item.name} #{item} #{id} ${indexName} </foreach><where><if test='id!=null'>  and id = #{mid}</if> ${name}</where>");
+        Set<String> set = engine.parseParameter(sql);
+        set.stream().forEach(System.out::println);
     }
 
 }

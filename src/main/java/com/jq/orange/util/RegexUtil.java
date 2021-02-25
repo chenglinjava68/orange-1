@@ -13,7 +13,9 @@ public class RegexUtil {
     }
 
     public static void main(String[] args) {
-        String replace = replace("  it ? user.id", "it", "list_2");
-        System.out.println(replace);
+        boolean matches = "item.name".matches( "item" + "(?!\\[^.,:\\s])+");
+        String aa = "item[0].name".replaceFirst("^\\s*" + "item" + "(?![^.,:\\s])", "aa");
+        System.out.println(aa);
+        System.out.println(matches);
     }
 }

@@ -65,6 +65,6 @@ public class TrimSqlNode implements SqlNode {
 
     @Override
     public void applyParameter(Set<String> set) {
-
+        contents.applyParameter(set);
     }
 }

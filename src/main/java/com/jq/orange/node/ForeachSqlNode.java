@@ -7,6 +7,7 @@ import com.jq.orange.util.OgnlUtil;
 import com.jq.orange.util.RegexUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -71,7 +72,15 @@ public class ForeachSqlNode implements SqlNode {
     @Override
     public void applyParameter(Set<String> set) {
         set.add(collection);
-
+        Set<String> temp = new HashSet<>();
+        contents.applyParameter(set);
+        for (String key: temp){
+            if (key.matches(item + "(?![^.,:\\s])"))
+                continue;
+            if (key.matches(index + "(?![^.,:\\s])"))
+                continue;
+            set.add(key);
+        }
     }
 
     public String getChildText(Context proxy, int currentIndex) {
