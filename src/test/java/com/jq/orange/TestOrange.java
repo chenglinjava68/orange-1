@@ -41,6 +41,22 @@ public class TestOrange {
     }
 
     @Test
+    public void testWhere() {
+        DynamicSqlEngine engine = new DynamicSqlEngine();
+        String sql = "<where><if test='id!=null'>  and id = #{id}</if><if test='id!=null'>  and id = #{id}</if></where>";
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", 2);
+        ArrayList<User> arrayList = new ArrayList<>();
+        arrayList.add(new User(10, "tom"));
+        arrayList.add(new User(11, "jerry"));
+        map.put("list", arrayList);
+
+        SqlMeta sqlMeta = engine.parse(sql, map);
+        System.out.println(sqlMeta.getSql());
+        sqlMeta.getJdbcParamValues().forEach(System.out::println);
+    }
+
+    @Test
     public void testForeach() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
         String sql = ("select * from user where name in <foreach collection='list' index='idx' open='(' separator=',' close=')'>#{item.name}== #{idx}</foreach>");

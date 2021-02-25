@@ -23,6 +23,7 @@ public class XmlParser {
             put("foreach", new ForeachHandler());
             put("if", new IfHandler());
             put("trim", new TrimHandler());
+            put("where", new WhereHandler());
         }
     };
 

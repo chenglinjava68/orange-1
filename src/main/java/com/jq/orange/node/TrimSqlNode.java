@@ -20,10 +20,6 @@ public class TrimSqlNode implements SqlNode {
     List<String> prefixesToOverride;
     List<String> suffixesToOverride;
 
-    public TrimSqlNode(SqlNode contents) {
-        this.contents = contents;
-    }
-
     public TrimSqlNode(SqlNode contents, String prefix, String suffix, List<String> prefixesToOverride, List<String> suffixesToOverride) {
         this.contents = contents;
         this.prefix = prefix;

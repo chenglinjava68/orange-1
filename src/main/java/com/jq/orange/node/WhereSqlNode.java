@@ -1,29 +1,15 @@
 package com.jq.orange.node;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class WhereSqlNode extends TrimSqlNode {
 
-    public WhereSqlNode(SqlNode contents) {
-        super(contents);
-        List<String> prefixesToOverride = new ArrayList<>();
-        prefixesToOverride.add("and ");
-        prefixesToOverride.add("and\n");
-        prefixesToOverride.add("and\r");
-        prefixesToOverride.add("and\t");
-        prefixesToOverride.add("or ");
-        prefixesToOverride.add("or\n");
-        prefixesToOverride.add("or\r");
-        prefixesToOverride.add("or\t");
+    static List<String> prefixesToOverride = Arrays.asList("AND ", "AND\r", "AND\t", "AND\n", "OR ", "OR\r", "OR\t", "OR\n"
+            , "and ", "and\r", "and\t", "and\n", "or ", "or\r", "or\t", "or\n");
 
-        List<String> suffixesToOverride = Collections.singletonList(",");
-        this.prefix = "where";
-        this.suffix = null;
-        this.prefixesToOverride = prefixesToOverride;
-        this.suffixesToOverride = suffixesToOverride;
-//        super(contents, "where", null, prefixesToOverride, suffixesToOverride);
+    public WhereSqlNode(SqlNode contents) {
+
+        super(contents, "WHERE", null, prefixesToOverride, null);
     }
 }
