@@ -6,6 +6,14 @@
 
 # 使用教程
 ```
+<dependency>
+    <groupId>com.jq</groupId>
+    <artifactId>orange</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
+```
     @Test
     public void testForeach() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
