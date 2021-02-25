@@ -25,6 +25,19 @@ public class TestOrange {
     }
 
     @Test
+    public void testIf() {
+        DynamicSqlEngine engine = new DynamicSqlEngine();
+        String sql = "id &lt;= #{maxId}";
+        Map<String, Object> map = new HashMap<>();
+        map.put("maxId", 10);
+
+        SqlMeta sqlMeta = engine.parse(sql, map);
+        System.out.println(sqlMeta.getSql());
+        sqlMeta.getJdbcParamValues().forEach(System.out::println);
+
+    }
+
+    @Test
     public void testTrim() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
         String sql = "<trim prefix='(' suffix=')' suffixesToOverride=',' prefixesToOverride='and' ><foreach collection='list' index='idx' open='(' separator=',' close=')'>#{item.name}== #{idx}</foreach><if test='id!=null'>  and xyz.,</if></trim>";

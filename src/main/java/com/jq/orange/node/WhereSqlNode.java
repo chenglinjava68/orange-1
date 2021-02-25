@@ -10,6 +10,6 @@ public class WhereSqlNode extends TrimSqlNode {
 
     public WhereSqlNode(SqlNode contents) {
 
-        super(contents, "WHERE", null, prefixesToOverride, null);
+        super(contents, "WHERE ", null, prefixesToOverride, null);
     }
 }

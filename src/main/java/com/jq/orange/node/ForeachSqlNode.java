@@ -42,6 +42,7 @@ public class ForeachSqlNode implements SqlNode {
 
     @Override
     public void apply(Context context) {
+        context.appendSql(" ");//标签类SqlNode先拼接空格，和前面的内容隔开
         Iterable<?> iterable = OgnlUtil.getIterable(collection, context.getData());
         int currentIndex = 0;
 

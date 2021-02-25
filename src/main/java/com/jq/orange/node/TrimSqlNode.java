@@ -30,7 +30,7 @@ public class TrimSqlNode implements SqlNode {
 
     @Override
     public void apply(Context context) {
-
+        context.appendSql(" ");//标签类SqlNode先拼接空格，和前面的内容隔开
         Context proxy = new Context(context.getData());
 //        FilterContext filterContext = new FilterContext(context);
         contents.apply(proxy);
