@@ -1,8 +1,10 @@
 package com.jq.orange.node;
 
 import com.jq.orange.context.Context;
-import com.jq.orange.context.ForeachContextProxy;
+import com.jq.orange.token.TokenHandler;
+import com.jq.orange.token.TokenParser;
 import com.jq.orange.util.OgnlUtil;
+import com.jq.orange.util.RegexUtil;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -21,8 +23,9 @@ public class ForeachSqlNode implements SqlNode {
     String separator;
     String item;
     String index;
-
     SqlNode contents;
+
+    String indexDataName;
 
     public ForeachSqlNode(String collection, String open, String close, String separator, String item, String index, SqlNode contents) {
         this.collection = collection;
@@ -32,6 +35,8 @@ public class ForeachSqlNode implements SqlNode {
         this.item = item;
         this.index = index;
         this.contents = contents;
+
+        this.indexDataName = String.format("__index_%s", collection);
     }
 
     @Override
@@ -40,29 +45,22 @@ public class ForeachSqlNode implements SqlNode {
         int currentIndex = 0;
 
         ArrayList<Integer> indexs = new ArrayList<>();
-        String indexDataName = String.format("__index_%s", collection);
+
         context.getData().put(indexDataName, indexs);
         context.appendSql(open);
 
         for (Object o : iterable) {
 
             ((ArrayList<Integer>) context.getData().get(indexDataName)).add(currentIndex);
-
             //不是第一次，需要拼接分隔符
             if (currentIndex != 0) {
                 context.appendSql(separator);
             }
 
-            String newItem = String.format("%s[%d]", collection, currentIndex);  //ognl可以直接获取  aaa[0]  形式的值
-            String newIndex = String.format("%s[%d]", indexDataName, currentIndex);  //ognl可以直接获取  aaa[0]  形式的值
+            Context proxy = new Context(context.getData());
+            String childSqlText = getChildText(proxy, currentIndex);
+            context.appendSql(childSqlText);
 
-//            String newItem = Constans.prefix + collection + "_" + currentIndex;
-//            context.getData().put(newItem, o);
-
-            // 创建代理context对象，主要是为了TextSqlNode解析调用appendSql方法的时候，可以使用代理对象复写的appendSql方法，
-            // 也就是append之前解析 #{item.xxx} 转化成 #{item[index].xxx}
-            ForeachContextProxy contextProxy = new ForeachContextProxy(context, item, newItem, index, newIndex);
-            contents.apply(contextProxy);
             currentIndex++;
         }
 
@@ -74,7 +72,27 @@ public class ForeachSqlNode implements SqlNode {
     public void applyParameter(Set<String> set) {
         set.add(collection);
 
+    }
 
+    public String getChildText(Context proxy, int currentIndex) {
+        String newItem = String.format("%s[%d]", collection, currentIndex);  //ognl可以直接获取  aaa[0]  形式的值
+        String newIndex = String.format("%s[%d]", indexDataName, currentIndex);
+        this.contents.apply(proxy);
+        String sql = proxy.getSql();
+        TokenParser tokenParser = new TokenParser("#{", "}", new TokenHandler() {
+            @Override
+            public String handleToken(String content) {
+                //item替换成自己的变量名: item[0]  item[1] item[2] ......
+                String replace = RegexUtil.replace(content, item, newItem);
+                if (replace.equals(content))
+                    //index替换成自己的变量名: __index_xxx[0]  __index_xxx[1] __index_xxx[2] ......
+                    replace = RegexUtil.replace(content, index, newIndex);
+                StringBuilder builder = new StringBuilder();
+                return builder.append("#{").append(replace).append("}").toString();
+            }
+        });
+        String parse = tokenParser.parse(sql);
+        return parse;
     }
 
 }

@@ -1,7 +1,8 @@
 # 概述
 
 - orange是一个动态sql引擎，类似mybatis的功能，解析带标签的动态sql，生成?占位符的sql和?对应的参数列表。
-- 借鉴了大量mybatis源码，相当于mybatis中的动态sql解析功能的抽取。
+- 借鉴了mybatis源码，相当于mybatis中的动态sql解析功能的抽取。
+- 支持 if foreach where trim
 
 # 使用教程
 ```
@@ -31,6 +32,3 @@ tom
 jerry
 ```
 
-# 注意
-- 目前仅支持 foreach if
-- foreach 不支持map类型参数
