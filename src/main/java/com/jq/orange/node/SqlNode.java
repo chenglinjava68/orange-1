@@ -2,6 +2,8 @@ package com.jq.orange.node;
 
 import com.jq.orange.context.Context;
 
+import java.util.Set;
+
 /**
  * @program: orange
  * @description:
@@ -11,5 +13,7 @@ import com.jq.orange.context.Context;
 public interface SqlNode {
 
     void apply(Context context);
+
+    void applyParameter(Set<String> set);
 
 }

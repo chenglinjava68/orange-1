@@ -2,9 +2,7 @@ package com.jq.orange.context;
 
 import com.jq.orange.util.OgnlUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @program: orange
@@ -17,6 +15,8 @@ public class Context {
 
     StringBuilder sqlBuilder = new StringBuilder();
     List<Object> jdbcParameters = new ArrayList<>();
+    Set<String> paramNames = new HashSet<>();
+
     //    List<Object> jdbcParameterNames = new ArrayList<>();
     Map<String, Object> data;
 
@@ -31,6 +31,10 @@ public class Context {
 
     public void addParameter(Object o) {
         jdbcParameters.add(o);
+    }
+
+    public void addParameterName(String o) {
+        paramNames.add(o);
     }
 
     /**

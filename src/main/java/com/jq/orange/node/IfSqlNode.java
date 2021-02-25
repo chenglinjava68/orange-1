@@ -2,6 +2,8 @@ package com.jq.orange.node;
 
 import com.jq.orange.context.Context;
 
+import java.util.Set;
+
 /**
  * @program: orange
  * @description:
@@ -26,5 +28,10 @@ public class IfSqlNode implements SqlNode {
             contents.apply(context);
         }
 
+    }
+
+    @Override
+    public void applyParameter(Set<String> set) {
+        contents.applyParameter(set);
     }
 }

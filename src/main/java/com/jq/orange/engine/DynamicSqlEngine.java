@@ -8,7 +8,9 @@ import com.jq.orange.token.TokenHandler;
 import com.jq.orange.token.TokenParser;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 动态sql引擎
@@ -30,6 +32,15 @@ public class DynamicSqlEngine {
         parseParameter(context);
         SqlMeta sqlMeta = new SqlMeta(context.getSql(), context.getJdbcParameters());
         return sqlMeta;
+    }
+
+    public Set<String> parseParameter(String text, Map<String, Object> params) {
+        text = String.format("<root>%s</root>", text);
+        SqlNode sqlNode = parseXml2SqlNode(text);
+
+        HashSet<String> set = new HashSet<>();
+        sqlNode.applyParameter(set);
+        return set;
     }
 
     public SqlNode parseXml2SqlNode(String text) {

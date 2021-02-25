@@ -3,6 +3,7 @@ package com.jq.orange.node;
 import com.jq.orange.context.Context;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @program: orange
@@ -22,6 +23,13 @@ public class MixedSqlNode implements SqlNode {
     public void apply(Context context) {
         for (SqlNode node: contents){
             node.apply(context);
+        }
+    }
+
+    @Override
+    public void applyParameter(Set<String> set) {
+        for (SqlNode node: contents){
+            node.applyParameter(set);
         }
     }
 }

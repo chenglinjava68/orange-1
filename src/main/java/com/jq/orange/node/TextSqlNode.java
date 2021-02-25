@@ -4,6 +4,8 @@ import com.jq.orange.context.Context;
 import com.jq.orange.token.TokenHandler;
 import com.jq.orange.token.TokenParser;
 
+import java.util.Set;
+
 /**
  * @program: orange
  * @description:
@@ -33,5 +35,26 @@ public class TextSqlNode implements SqlNode {
 
         context.appendSql(s);
 
+    }
+
+    @Override
+    public void applyParameter(Set<String> set) {
+        TokenParser tokenParser = new TokenParser("${", "}", new TokenHandler() {
+            @Override
+            public String handleToken(String paramName) {
+                set.add(paramName);
+                return paramName;
+            }
+        });
+        String s = tokenParser.parse(text);
+
+        TokenParser tokenParser2 = new TokenParser("#{", "}", new TokenHandler() {
+            @Override
+            public String handleToken(String paramName) {
+                set.add(paramName);
+                return paramName;
+            }
+        });
+        tokenParser2.parse(s);
     }
 }

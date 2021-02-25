@@ -83,12 +83,7 @@ public class TokenParser {
                 }
                 //搜索到真实的右括号}
                 else {
-
-
-
                     builder.append(tokenHandler.handleToken(expression.toString().trim()));
-
-
                     offset = end + closeToken.length();
                 }
             }

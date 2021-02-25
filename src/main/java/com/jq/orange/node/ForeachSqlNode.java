@@ -5,6 +5,7 @@ import com.jq.orange.context.ForeachContextProxy;
 import com.jq.orange.util.OgnlUtil;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * @program: orange
@@ -66,6 +67,13 @@ public class ForeachSqlNode implements SqlNode {
         }
 
         context.appendSql(close);
+
+    }
+
+    @Override
+    public void applyParameter(Set<String> set) {
+        set.add(collection);
+
 
     }
 
