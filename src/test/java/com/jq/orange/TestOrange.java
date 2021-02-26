@@ -148,6 +148,18 @@ public class TestOrange {
     }
 
     @Test
+    public void testSet() {
+        DynamicSqlEngine engine = new DynamicSqlEngine();
+        String sql = ("update<set><if test='id !=null'> id = #{id} ,</if><if test='id !=null'> id = #{id} , </if></set>");
+        Map<String, Object> map = new HashMap<>();
+        map.put("id",10);
+        SqlMeta sqlMeta = engine.parse(sql, map);
+        System.out.println(sqlMeta.getSql());
+        sqlMeta.getJdbcParamValues().forEach(System.out::println);
+
+    }
+
+    @Test
     public void testParseParam() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
         String sql = ("<foreach collection='list' open='(' separator=',' close=')'>#{item.name} #{item} #{id} ${indexName} </foreach><where><if test='id!=null'>  and id = #{mid}</if> ${name}</where>");

@@ -1,5 +1,7 @@
 package com.jq.orange.util;
 
+import java.util.regex.Pattern;
+
 /**
  * @program: orange
  * @description:
@@ -13,9 +15,12 @@ public class RegexUtil {
     }
 
     public static void main(String[] args) {
-        boolean matches = "item.name".matches( "item" + "(?!\\[^.,:\\s])+");
-        String aa = "item[0].name".replaceFirst("^\\s*" + "item" + "(?![^.,:\\s])", "aa");
-        System.out.println(aa);
-        System.out.println(matches);
+        boolean matches = "item".matches( "item" + "[.,:\\s\\[]");
+
+        boolean item = Pattern.compile("item[.,:\\s\\[]").matcher("item").matches();
+
+//        String aa = "item[0].name".replaceFirst("^\\s*" + "item" + "(?![^.,:\\s])", "aa");
+//        System.out.println(aa);
+        System.out.println(item);
     }
 }

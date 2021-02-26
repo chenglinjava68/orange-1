@@ -24,6 +24,7 @@ public class XmlParser {
             put("if", new IfHandler());
             put("trim", new TrimHandler());
             put("where", new WhereHandler());
+            put("set", new SetHandler());
         }
     };
 

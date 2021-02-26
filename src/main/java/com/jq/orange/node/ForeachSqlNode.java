@@ -76,9 +76,9 @@ public class ForeachSqlNode implements SqlNode {
         Set<String> temp = new HashSet<>();
         contents.applyParameter(set);
         for (String key: temp){
-            if (key.matches(item + "(?![^.,:\\s])"))
+            if (key.matches(item + "[.,:\\s\\[]"))
                 continue;
-            if (key.matches(index + "(?![^.,:\\s])"))
+            if (key.matches(index + "[.,:\\s\\[]"))
                 continue;
             set.add(key);
         }
