@@ -102,6 +102,7 @@ public class TestOrange {
         sqlMeta.getJdbcParamValues().forEach(System.out::println);
     }
 
+/*
     @Test
     public void testForeachMap() {
         DynamicSqlEngine engine = new DynamicSqlEngine();
@@ -121,6 +122,7 @@ public class TestOrange {
         System.out.println(sqlMeta.getSql());
         sqlMeta.getJdbcParamValues().forEach(System.out::println);
     }
+*/
 
     @Test
     public void testMultiForeach() {
