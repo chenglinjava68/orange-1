@@ -4,9 +4,42 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.jq</groupId>
+    <groupId>com.github.freakchick</groupId>
     <artifactId>orange</artifactId>
     <version>1.0</version>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <developers>
+        <developer>
+            <name>freakchick</name>
+            <url>https://github.com/freakchick/orange</url>
+            <email>jiangqiang110@126.com</email>
+            <roles>
+                <role>developer</role>
+                <role>admin</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/freakchick/orange.git</connection>
+        <developerConnection>scm:git:https://github.com/freakchick/orange</developerConnection>
+        <url>git:https://github.com/freakchick/orange.git</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License,Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+
     <build>
         <plugins>
             <plugin>
@@ -38,12 +71,12 @@
             <version>3.10</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--            <version>1.18.12</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.projectlombok</groupId>-->
+        <!--            <artifactId>lombok</artifactId>-->
+        <!--            <version>1.18.12</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
