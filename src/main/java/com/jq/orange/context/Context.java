@@ -4,13 +4,7 @@ import com.jq.orange.util.OgnlUtil;
 
 import java.util.*;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-20 16:05
- **/
-//@Getter
+
 public class Context {
 
     StringBuilder sqlBuilder = new StringBuilder();

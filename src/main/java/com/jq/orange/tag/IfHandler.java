@@ -7,12 +7,7 @@ import org.dom4j.Element;
 
 import java.util.List;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-22 16:56
- **/
+
 public class IfHandler implements TagHandler {
 
     @Override

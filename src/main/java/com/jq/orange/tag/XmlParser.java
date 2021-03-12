@@ -10,12 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-22 16:25
- **/
+
 public class XmlParser {
 
     static Map<String, TagHandler> nodeHandlers = new HashMap<String, TagHandler>() {
@@ -28,12 +23,8 @@ public class XmlParser {
         }
     };
 
-    /**
-     * 将xml内容解析成sqlNode类型
-     *
-     * @param text
-     * @return
-     */
+    //将xml内容解析成sqlNode类型
+
     public static SqlNode parseXml2SqlNode(String text) {
 
         Document document = null;
@@ -48,12 +39,8 @@ public class XmlParser {
         return sqlNode;
     }
 
-    /**
-     * 解析单个标签的子内容，转化成sqlNode list
-     *
-     * @param element
-     * @return
-     */
+    //解析单个标签的子内容，转化成sqlNode list
+
     public static List<SqlNode> parseElement(Element element) {
         List<SqlNode> nodes = new ArrayList<>();
 

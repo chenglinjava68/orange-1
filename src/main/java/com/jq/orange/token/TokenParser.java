@@ -2,12 +2,7 @@ package com.jq.orange.token;
 
 import org.dom4j.DocumentException;
 
-/**
- * @program: dbApi
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-19 16:33
- **/
+
 public class TokenParser {
 
     private String openToken;

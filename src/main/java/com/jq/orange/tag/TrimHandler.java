@@ -8,12 +8,7 @@ import org.dom4j.Element;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-24 11:20
- **/
+
 public class TrimHandler implements TagHandler {
 
     @Override

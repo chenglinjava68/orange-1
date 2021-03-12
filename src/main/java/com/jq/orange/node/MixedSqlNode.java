@@ -5,12 +5,7 @@ import com.jq.orange.context.Context;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-22 15:57
- **/
+
 public class MixedSqlNode implements SqlNode {
 
     List<SqlNode> contents ;

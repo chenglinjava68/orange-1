@@ -6,12 +6,7 @@ import com.jq.orange.token.TokenParser;
 
 import java.util.Set;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-22 15:57
- **/
+
 public class TextSqlNode implements SqlNode {
 
     String text;

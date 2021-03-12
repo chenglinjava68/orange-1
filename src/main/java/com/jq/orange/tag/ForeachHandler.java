@@ -8,12 +8,7 @@ import org.dom4j.Element;
 
 import java.util.List;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-22 17:27
- **/
+
 public class ForeachHandler implements TagHandler {
     @Override
     public void handle(Element element, List<SqlNode> targetContents) {

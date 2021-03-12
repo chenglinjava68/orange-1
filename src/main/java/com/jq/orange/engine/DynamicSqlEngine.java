@@ -12,14 +12,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * 动态sql引擎
- *
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-22 18:21
- **/
+
 public class DynamicSqlEngine {
 
     Cache cache = new Cache();

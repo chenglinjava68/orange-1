@@ -2,12 +2,7 @@ package com.jq.orange.util;
 
 import java.util.regex.Pattern;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-23 15:19
- **/
+
 public class RegexUtil {
 
     public static String replace(String content, String item, String newItem) {

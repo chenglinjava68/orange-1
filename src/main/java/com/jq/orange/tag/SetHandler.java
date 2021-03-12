@@ -7,12 +7,7 @@ import org.dom4j.Element;
 
 import java.util.List;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-25 10:41
- **/
+
 public class SetHandler implements TagHandler{
 
     @Override

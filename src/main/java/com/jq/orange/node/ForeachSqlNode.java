@@ -10,12 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-22 16:20
- **/
+
 public class ForeachSqlNode implements SqlNode {
 
     String collection;

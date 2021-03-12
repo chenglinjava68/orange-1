@@ -6,12 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @program: orange
- * @description:
- * @author: jiangqiang
- * @create: 2021-02-24 11:19
- **/
+
 public class TrimSqlNode implements SqlNode {
 
     SqlNode contents;
