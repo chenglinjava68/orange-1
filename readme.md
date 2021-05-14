@@ -57,6 +57,7 @@ jerry
 
 # 联系作者：
 ## wechat：
+- 提问前麻烦请先star支持一下
 <div style="text-align: center"> 
 <img src="https://freakchicken.gitee.io/images/kafkaui/wechat.jpg" width = "30%" />
 </div>
