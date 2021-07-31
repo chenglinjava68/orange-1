@@ -57,6 +57,7 @@ jerry
 
 # 联系作者：
 ## wechat：
+- 提问前麻烦请先star支持一下
 <div style="text-align: center"> 
 <img src="https://freakchicken.gitee.io/images/kafkaui/wechat.jpg" width = "30%" />
 </div>
@@ -66,5 +67,5 @@ jerry
 如果您喜欢此项目，请给作者加鸡腿
 <div style="text-align: center"> 
 <img src="https://freakchicken.gitee.io/images/kafkaui/wechatpay.jpg" width = "30%" />
-<img src="https://freakchicken.gitee.io/images/kafkaui/alipay.jpg" width = "33%" />
+<img src="https://freakchicken.gitee.io/images/kafkaui/alipay.jpg" width = "29%" />
 </div>
