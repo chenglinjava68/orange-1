@@ -14,7 +14,7 @@ mvn -DskipTests=true install
 ```
 #pom引入maven坐标
 <dependency>
-    <groupId>com.jq</groupId>
+    <groupId>com.github.freakchick</groupId>
     <artifactId>orange</artifactId>
     <version>1.0</version>
 </dependency>
